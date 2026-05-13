@@ -1,8 +1,11 @@
 import "./App.css";
 
 import { Route, Routes } from "react-router-dom";
+
+import Post1 from "./pages/1";
 import Home from "./component/Home";
 import Nav from "./component/Nav";
+
 function App() {
   return (
     <div className="page">
@@ -11,10 +14,11 @@ function App() {
       {/* 内容区域 */}
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="react-learning" element={<Post1 />} />
       </Routes>
       {/* 底部 */}
       <footer className="site-footer">
-        <div className="container">© 2025 My Blog</div>
+        <div className="container">© 2026 My Blog</div>
       </footer>
     </div>
   );
