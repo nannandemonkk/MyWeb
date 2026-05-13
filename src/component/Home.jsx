@@ -1,4 +1,6 @@
 import { Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 
 export default function Home() {
   return (
@@ -15,7 +17,7 @@ export default function Home() {
         <ul className="post-list">
           <li>
             <span>2026-05-13</span>
-            <a href="/post/1">React Router 学习笔记</a>
+            <Link to="/react-learning">React Router 学习笔记</Link>
           </li>
         </ul>
       </div>
