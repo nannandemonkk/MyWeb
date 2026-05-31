@@ -19,6 +19,12 @@ export default function Home() {
             <span>2026-05-13</span>
             <Link to="/react-learning">React Router 学习笔记</Link>
           </li>
+          <li>
+            <span>2026-05-29</span>
+            <Link to="/may-29">5月29日学习笔记</Link>
+          </li>
+
+
         </ul>
       </div>
     </main>
