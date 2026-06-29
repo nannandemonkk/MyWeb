@@ -11,17 +11,16 @@ const modules = import.meta.glob("./document/*.md", {
 });
 
 // 将 md 模块转换为路由配置
-const posts = Object.entries(modules).map(([path, content]) => {
+const posts = Object.entries(modules).map(([path, module]) => {
+  const content = module.default || module;  // 兼容两种情况
   const fileName = path.split("/").pop().replace(".md", "");
   
   // 从 md 内容中提取标题（第一个 # 开头的行）
   const titleMatch = content.match(/^#\s+(.+)$/m);
   const title = titleMatch ? titleMatch[1] : fileName;
   
-  // 提取日期
-  const dateMatch = content.match(/^#\s+(\d{4}[-.]\d{1,2}[-.]\d{1,2})/m) || 
-                    content.match(/^#\s+(\d{1,2}月\d{1,2}日)/m) ||
-                    content.match(/(\d{4}[-.]\\d{1,2}[-.]\\d{1,2})/m);
+  // 提取日期（年-月-日格式）
+  const dateMatch = content.match(/^#\s+(\d{4}[-.]\d{1,2}[-.]\d{1,2})/m);
   const date = dateMatch ? dateMatch[1] : fileName;
   
   return {
