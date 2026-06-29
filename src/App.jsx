@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./component/Home";
 import Nav from "./component/Nav";
 import Post from "./component/Post";
-import posts from "./component/PostUpdate";
+import posts from "./data/posts";
 
 function App() {
   return (
