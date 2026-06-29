@@ -2,10 +2,12 @@ import "./App.css";
 
 import { Route, Routes } from "react-router-dom";
 
-import Post1 from "./pages/2026.5.13";
-import Post2 from "./pages/2026.5.29";
 import Home from "./component/Home";
 import Nav from "./component/Nav";
+import Post from "./component/Post";
+import posts from "./component/PostUpdate";
+
+
 
 function App() {
   return (
@@ -14,9 +16,14 @@ function App() {
       <Nav />
       {/* 内容区域 */}
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="react-learning" element={<Post1 />} />
-        <Route path="may-29" element={<Post2 />} />
+        <Route path="/" element={<Home posts={posts} />} />
+        {posts.map((post) => (
+          <Route
+            key={post.slug}
+            path={`/post/${post.slug}`}
+            element={<Post title={post.title} mdContent={post.content} />}
+          />
+        ))}
       </Routes>
       {/* 底部 */}
       <footer className="site-footer">
