@@ -17,7 +17,7 @@ function App() {
           <Route
             key={post.slug}
             path={`/post/${post.slug}`}
-            element={<Post title={post.title} mdContent={post.content} />}
+            element={<Post mdContent={post.content} />}
           />
         ))}
       </Routes>
