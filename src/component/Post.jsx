@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-import ReactMarkdown from "react-markdown";
-export default function Post({ title, mdContent }) {
-    return (
-    <div>
-        <h1>{title}</h1>
-        <ReactMarkdown>{mdContent}</ReactMarkdown>
-    </div>
-    );
-}
-    
-=======
 import ReactMarkdown from "react-markdown";
 
 export default function Post({ mdContent, title }) {
@@ -22,4 +10,3 @@ export default function Post({ mdContent, title }) {
     </main>
   );
 }
->>>>>>> cuinan1
