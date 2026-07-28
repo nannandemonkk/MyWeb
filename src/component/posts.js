@@ -1,5 +1,5 @@
 // 自动扫描 document 目录下的所有 md 文件
-const modules = import.meta.glob("../document/*.md", { query: "?raw", eager: true });
+const modules = import.meta.glob("../../document/*.md", { query: "?raw", eager: true });
 
 const posts = Object.entries(modules).map(([path, module]) => {
     const content = module.default || module;

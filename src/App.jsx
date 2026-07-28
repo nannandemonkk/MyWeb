@@ -3,13 +3,15 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./component/Home";
 import Nav from "./component/Nav";
 import Post from "./component/Post";
-import posts from "./data/posts";
+import posts from "./component/posts";
 
 function App() {
   return (
     <div className="page">
-      {/* 顶部导航 */}
+      
+      {/* 导航栏 */}
       <Nav />
+
       {/* 内容区域 */}
       <Routes>
         <Route path="/" element={<Home posts={posts} />} />
@@ -21,6 +23,7 @@ function App() {
           />
         ))}
       </Routes>
+
       {/* 底部 */}
       <footer className="site-footer">
         <div className="container">© 2026 My Blog</div>
