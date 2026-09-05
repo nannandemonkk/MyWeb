@@ -27,7 +27,7 @@ body {
 }
 
 /* =======================
-   顶部黑色导航（和官网一样）
+   顶部导航
 ======================= */
 .site-header {
   background: #fffbeb;
@@ -43,7 +43,7 @@ body {
   float: right;
 }
 .site-nav a {
-  color: white;
+  color: rgb(91, 86, 86);
   text-decoration: none;
   margin-left: 24px;
   font-size: 15px;

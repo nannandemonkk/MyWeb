@@ -7,7 +7,7 @@ import posts from "./component/posts";
 
 function App() {
   return (
-    <div className="page">
+    <div>
       
       {/* 导航栏 */}
       <Nav />
