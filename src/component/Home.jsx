@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 
 export default function Home({ posts }) {
   return (
-    <main className="container content">
+    <main className="container home">
       <div className="post">
         <h2>我的博客</h2>
-        <p>欢迎来到我的个人博客，这里记录了我的学习和生活。</p>
+        <p>欢迎来到我的个人博客。</p>
 
         <h3>所有文章</h3>
         <ul className="post-list">
