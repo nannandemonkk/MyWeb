@@ -7,17 +7,10 @@ export default function Home({ posts }) {
         <h2>我的博客</h2>
         <p>欢迎来到我的个人博客。</p>
 
-        <h3>所有文章</h3>
-        <ul className="post-list">
-          {posts.map((post) => (
-            <li key={post.slug}>
-              <span className="post-date">{post.date}</span>
-              <Link to={`/post/${post.slug}`} className="post-link">
-                {post.title}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <div>
+
+          
+        </div>
       </div>
     </main>
   );
