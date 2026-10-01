@@ -3,7 +3,6 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./component/Home";
 import Nav from "./component/Nav";
 import Post from "./component/Post";
-import posts from "./component/posts";
 
 function App() {
   return (
@@ -14,14 +13,8 @@ function App() {
 
       {/* 内容区域 */}
       <Routes>
-        <Route path="/" element={<Home posts={posts} />} />
-        {posts.map((post) => (
-          <Route
-            key={post.slug}
-            path={`/post/${post.slug}`}
-            element={<Post mdContent={post.content} />}
-          />
-        ))}
+        <Route path="/" element={<Home />} />
+        <Route path="/post/:slug" element={<Post />} />
       </Routes>
 
       {/* 底部 */}
