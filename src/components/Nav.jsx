@@ -14,7 +14,7 @@ export default function Nav() {
           <Link to="/plans">计划</Link>
         </nav>
         
-        <img src="./../image/avater.jpg" alt="头像" className="avatar" />
+        <img src="/image/avatar.jpg" alt="头像" className="avatar" />
       </div>
     </header>
   );

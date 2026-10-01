@@ -4,12 +4,14 @@ import fs from "node:fs/promises";
 import path from "node:path";
 
 const app = express();
-const PORT = 3000;
+// 端口优先读环境变量 PORT —— 部署到云端时，平台会用自己的方式告诉你该监听哪个端口
+// 没有这个变量就用 3000（本地开发）
+const PORT = process.env.PORT || 3000;
 
 // document 目录在哪里
 // import.meta.dirname 是「这个文件所在的目录」，也就是 .../MyWeb/server
-// ".." 往上一层 = 项目根目录，再接上 document
-const DOCS_DIR = path.join(import.meta.dirname, "..", "document");
+// 文章数据现在跟后端放在一起，所以直接接 document 就行
+const DOCS_DIR = path.join(import.meta.dirname, "document");
 
 // 从 md 正文里抠出标题和日期（跟原前端 posts.js 里那套一样）
 function parseMeta(filename, content) {

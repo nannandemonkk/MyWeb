@@ -1,8 +1,8 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import Home from "./component/Home";
-import Nav from "./component/Nav";
-import Post from "./component/Post";
+import Home from "./pages/Home";
+import Nav from "./components/Nav";
+import Post from "./pages/Post";
 
 function App() {
   return (
