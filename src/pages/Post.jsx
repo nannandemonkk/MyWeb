@@ -1,30 +1,22 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
-import { fetchPost } from "../api";
+import { usePost } from "../hooks/usePost";
 
-// 外层只干一件事：把 URL 里的 slug 取出来
 export default function Post() {
+  // 从 URL 取出 slug（如 /posts/2026-09-17 → "2026-09-17"）
   const { slug } = useParams();
 
-  // key={slug} —— slug 一变化，React 就当作换了一个全新组件，
-  // 把旧的丢掉、重新挂载一份。Article 里的 state 自然归零，
-  // 所以不用在 useEffect 里手动 setLoading(true) 去复位。
-  return <Article key={slug} slug={slug} />;
-}
+  // key={slug} —— slug 一变，React 把这个组件当全新的重新挂载，
+  // usePost 里的 state 自然归零（loading 回到 true），不用手动复位
+  return < Article key={slug} slug={slug} />;
+} 
 
-// 内层才是真正干活的那个
+// 内层：真正用 hook 拿数据、渲染文章
 function Article({ slug }) {
-  const [post, setPost] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  // 数据怎么来的？不关这个组件的事，全在 usePost 里
+  const { post, loading, error } = usePost(slug);
 
-  useEffect(() => {
-    fetchPost(slug)
-      .then(setPost) // 成功：存下数据
-      .catch((err) => setError(err.message)) // 失败：存下错误
-      .finally(() => setLoading(false)); // 不管成败：结束加载
-  }, [slug]);
+  // 下面只负责"状态 → 界面"的翻译
 
   if (loading) {
     return (

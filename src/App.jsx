@@ -7,14 +7,13 @@ import Post from "./pages/Post";
 function App() {
   return (
     <div>
-      
       {/* 导航栏 */}
       <Nav />
 
       {/* 内容区域 */}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/post/:slug" element={<Post />} />
+        <Route path="/posts/:slug" element={<Post />} />
       </Routes>
 
       {/* 底部 */}

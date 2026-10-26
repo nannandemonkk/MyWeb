@@ -1,20 +1,11 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { fetchPosts } from "../api";
+import { usePosts } from "../hooks/usePosts";
 
 export default function Home() {
-  // 三样东西：数据、还在不在加载、有没有出错
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  // 数据怎么来的？loading 怎么变的？—— 不关这个组件的事，全在 usePosts 里
+  const { posts, loading, error } = usePosts();
 
-  // 组件第一次显示出来的时候，去后端要数据
-  useEffect(() => {
-    fetchPosts()
-      .then(setPosts)                         // 成功：把数据存进状态
-      .catch((err) => setError(err.message))  // 失败：记住错误信息
-      .finally(() => setLoading(false));      // 不管成败：不再加载了
-  }, []);                                     // [] = 只在第一次执行一次
+  // 下面只负责"状态 → 界面"的翻译
 
   if (loading) {
     return (
@@ -42,6 +33,15 @@ export default function Home() {
         <h2>我的博客</h2>
         <p>欢迎来到我的个人博客。</p>
 
+        <ul>
+          {posts.map((post) => (
+            <li key={post.slug}>
+              <Link to={`/posts/${post.slug}`}>
+                {post.title}({post.date})
+              </Link>
+            </li>
+          ))}
+        </ul>
       </div>
     </main>
   );

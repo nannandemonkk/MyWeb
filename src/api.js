@@ -12,7 +12,7 @@ export async function fetchPosts() {
 
 // 单篇文章详情
 export async function fetchPost(slug) {
-  const res = await fetch(`${BASE}/posts/${slug}`);
+  const res = await fetch(`${BASE}/posts/${encodeURIComponent(slug)}`);
   if (!res.ok) throw new Error("文章不存在");
   return res.json();
 }
