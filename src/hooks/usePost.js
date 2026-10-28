@@ -1,20 +1,33 @@
-// src/hooks/usePost.js —— 管理单篇文章数据的生命周期
-// 和 usePosts 是双胞胎套路：请求 → loading/error/data 三状态
-
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { fetchPost } from "../api";
 
 export function usePost(slug) {
-  const [post, setPost] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { key } = useLocation();
+  const [revision, setRevision] = useState(0);
+  const requestKey = `${slug}:${key}:${revision}`;
+  const [result, setResult] = useState({ key: null, post: null, error: null });
 
   useEffect(() => {
-    fetchPost(slug)
-      .then(setPost)                          // 成功：存下文章
-      .catch((err) => setError(err.message))   // 失败：存下错误
-      .finally(() => setLoading(false));       // 不论成败：结束加载
-  }, [slug]);                                  // 依赖 slug：slug 变了就重新执行
+    const reload = () => setRevision((value) => value + 1);
+    const onVisibility = () => { if (document.visibilityState === "visible") reload(); };
+    window.addEventListener("myweb:posts-changed", reload);
+    window.addEventListener("focus", reload);
+    document.addEventListener("visibilitychange", onVisibility);
+    return () => {
+      window.removeEventListener("myweb:posts-changed", reload);
+      window.removeEventListener("focus", reload);
+      document.removeEventListener("visibilitychange", onVisibility);
+    };
+  }, []);
 
-  return { post, loading, error };
+  useEffect(() => {
+    const controller = new AbortController();
+    fetchPost(slug, { signal: controller.signal })
+      .then((post) => { if (!controller.signal.aborted) setResult({ key: requestKey, post, error: null }); })
+      .catch((error) => { if (!controller.signal.aborted) setResult({ key: requestKey, post: null, error }); });
+    return () => controller.abort();
+  }, [requestKey, slug]);
+
+  return { post: result.post, loading: result.key !== requestKey, error: result.key === requestKey ? result.error?.message : null, errorStatus: result.error?.status };
 }

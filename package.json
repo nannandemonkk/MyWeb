@@ -3,11 +3,17 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "engines": {
+    "node": ">=24.0.0"
+  },
   "scripts": {
-    "dev": "vite",
-    "server": "node server/app.js",
-    "build": "vite build",
+    "dev": "vite --configLoader native",
+    "server": "node --env-file-if-exists=.env server/index.js",
+    "start": "node --env-file-if-exists=.env server/index.js --production",
+    "admin:setup": "node --env-file-if-exists=.env server/setup-admin.js",
+    "build": "vite build --configLoader native",
     "lint": "eslint .",
+    "test": "node --test --test-isolation=none server/*.test.js",
     "preview": "vite preview"
   },
   "dependencies": {
